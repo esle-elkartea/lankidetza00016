@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<aon-project>
+	<property name="dbname" value="aon_employee" />
+	<property name="dbport" value="6606" />
+	<property name="update.url" value="http://www.directia.net/afadfa/downloads/update_aon_1.jar" />
+	<property name="uptodate.flag" value="uptodate.flag.v1001" />
+	<property name="prog.version" value="1.0.1" />
+	<update.database.files>
+		<update.database.file order="1" value="update.database1.sql"/>
+		<update.database.file order="2" value="update.database2.sql"/>
+	</update.database.files>
+</aon-project>

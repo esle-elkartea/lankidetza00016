@@ -1,0 +1,15 @@
+com.code.aon.common
+com.code.aon.common.bean
+com.code.aon.common.dao
+com.code.aon.common.dao.hibernate
+com.code.aon.common.dao.hibernate.type
+com.code.aon.common.dao.sql
+com.code.aon.common.enumeration
+com.code.aon.common.event
+com.code.aon.common.jndi
+com.code.aon.common.mime
+com.code.aon.common.temp
+com.code.aon.common.tree
+com.code.aon.common.tree.enumeration
+com.code.aon.common.velocity
+com.code.aon.common.xml

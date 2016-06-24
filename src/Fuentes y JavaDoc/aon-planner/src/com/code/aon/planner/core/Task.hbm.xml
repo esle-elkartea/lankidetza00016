@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping
+>
+    <class
+        name="com.code.aon.planner.core.Task"
+        table="task"
+    >
+
+        <id
+            name="id"
+            column="id"
+            type="java.lang.String"
+        >
+            <generator class="native">
+              <!--  
+                  To add non XDoclet generator parameters, create a file named 
+                  hibernate-generator-params-Task.xml 
+                  containing the additional parameters and place it in your merge dir. 
+              --> 
+            </generator>
+        </id>
+
+        <property
+            name="title"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            column="title"
+        />
+
+        <property
+            name="startDate"
+            type="java.util.Date"
+            update="true"
+            insert="true"
+            column="startDate"
+        />
+
+        <property
+            name="dueDate"
+            type="java.util.Date"
+            update="true"
+            insert="true"
+            column="dueDate"
+        />
+
+        <property
+            name="priority"
+            type="com.code.aon.planner.enumeration.hibernate.PriorityUserType"
+            update="true"
+            insert="true"
+            column="priority"
+            not-null="true"
+        />
+
+        <property
+            name="status"
+            type="com.code.aon.planner.enumeration.hibernate.TaskStatusUserType"
+            update="true"
+            insert="true"
+            column="status"
+            not-null="true"
+        />
+
+        <property
+            name="percent"
+            type="int"
+            update="true"
+            insert="true"
+            column="percent"
+        />
+
+        <many-to-one
+            name="owner"
+            class="com.code.aon.registry.Registry"
+            cascade="none"
+            outer-join="true"
+            update="true"
+            insert="true"
+            column="owner"
+        />
+
+        <set
+            name="resources"
+            lazy="false"
+            cascade="delete"
+            sort="unsorted"
+        >
+
+            <key
+                column="task"
+            >
+            </key>
+
+            <one-to-many
+                  class="com.code.aon.planner.core.HumanResource"
+            />
+
+        </set>
+
+        <property
+            name="alarmDate"
+            type="java.util.Date"
+            update="true"
+            insert="true"
+            column="alarmDate"
+        />
+
+        <!--
+            To add non XDoclet property mappings, create a file named
+                hibernate-properties-Task.xml
+            containing the additional properties and place it in your merge dir.
+        -->
+
+    </class>
+
+</hibernate-mapping>

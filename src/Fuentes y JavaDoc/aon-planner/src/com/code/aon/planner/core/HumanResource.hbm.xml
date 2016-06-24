@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping
+>
+    <class
+        name="com.code.aon.planner.core.HumanResource"
+        table="resource"
+    >
+
+        <id
+            name="id"
+            column="id"
+            type="java.lang.Integer"
+        >
+            <generator class="native">
+              <!--  
+                  To add non XDoclet generator parameters, create a file named 
+                  hibernate-generator-params-HumanResource.xml 
+                  containing the additional parameters and place it in your merge dir. 
+              --> 
+            </generator>
+        </id>
+
+        <many-to-one
+            name="task"
+            class="com.code.aon.planner.core.Task"
+            cascade="none"
+            outer-join="true"
+            update="true"
+            insert="true"
+            column="task"
+        />
+
+        <many-to-one
+            name="registry"
+            class="com.code.aon.registry.Registry"
+            cascade="none"
+            outer-join="true"
+            update="true"
+            insert="true"
+            column="registry"
+        />
+
+        <property
+            name="entryDate"
+            type="java.util.Date"
+            update="true"
+            insert="true"
+            column="entryDate"
+            not-null="true"
+        />
+
+        <!--
+            To add non XDoclet property mappings, create a file named
+                hibernate-properties-HumanResource.xml
+            containing the additional properties and place it in your merge dir.
+        -->
+
+    </class>
+
+</hibernate-mapping>

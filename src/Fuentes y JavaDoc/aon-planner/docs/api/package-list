@@ -1,0 +1,9 @@
+com.code.aon.planner
+com.code.aon.planner.core
+com.code.aon.planner.core.dao
+com.code.aon.planner.enumeration
+com.code.aon.planner.enumeration.hibernate
+com.code.aon.planner.model
+com.code.aon.planner.recurrence
+com.code.aon.planner.test
+com.code.aon.planner.util

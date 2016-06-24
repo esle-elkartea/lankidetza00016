@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core" 
+	xmlns:t="http://myfaces.apache.org/tomahawk"            
+	xmlns:h="http://java.sun.com/jsf/html">
+<body>
+
+<ui:composition template="/facelet/templates/aon.ui.content.xhtml">
+
+	<ui:define name="head">
+		<ui:include src="/facelet/shared/head.xhtml" />
+		<script type='text/javascript'
+			src="${facesContext.externalContext.requestContextPath}/js/updater.js">
+			// nothing
+		</script>
+	</ui:define>
+
+	<ui:define name="content">
+		<f:loadBundle basename="com.code.aon.gtm.i18n.updater"
+			var="updaterBundle" />
+
+		<h:form id="updaterForm" enctype="multipart/form-data">
+			<t:div styleClass="aon-content-toolbar" id="aon-content-toolbar"
+				forceId="#{true}">
+				<t:div styleClass="aon-content-toolbar-internal">
+				<t:div styleClass="aon-content-toolbar-item-group">
+					<t:commandButton 
+						id="url" 
+						value="#{updaterBundle.aon_update}"
+						action="update" 
+						actionListener="#{updater.init}" 
+						forceId="#{true}"
+						styleClass="aon-content-toolbar-item aon-content-toolbar-item-save"
+						onmouseover="this.className='aon-content-toolbar-item aon-content-toolbar-item-hover aon-content-toolbar-item-save'"
+						onmouseout="this.className='aon-content-toolbar-item aon-content-toolbar-item-save'" />
+				</t:div>
+				</t:div>
+			</t:div>
+
+			<t:div styleClass="aon-content-subtitle" id="aon-content-subtitle"
+				forceId="#{true}">
+				<t:div styleClass="aon-content-subtitle-internal">
+				<h:outputText
+					value="#{updaterBundle.aon_update}" />
+				</t:div>
+			</t:div>
+
+			<t:div id="aon-scroll-area" forceId="#{true}">
+				<t:div styleClass="aon-scroll-area-internal">
+				
+					<div>
+						<t:commandLink immediate="#{true}"  
+							id="actionElement"
+							forceId="#{true}"
+							styleClass="aon-table-row-selected" />
+						<div>
+						<t:selectOneMenu styleClass="aon-form-selectOneMenu-field" 
+							id="status" value="#{updater.status}"
+							forceId="#{true}"
+							disabled="true">
+							<f:selectItem itemLabel="#{updaterBundle.aon_update_status_0}" itemValue="0"/>
+							<f:selectItem itemLabel="#{updaterBundle.aon_update_status_1}" itemValue="1"/>
+							<f:selectItem itemLabel="#{updaterBundle.aon_update_status_2}" itemValue="2"/>
+							<f:selectItem itemLabel="#{updaterBundle.aon_update_status_3}" itemValue="3"/>
+							<f:selectItem itemLabel="#{updaterBundle.aon_update_status_4}" itemValue="4"/>
+							<f:selectItem itemLabel="#{updaterBundle.aon_update_status_5}" itemValue="5"/>
+						</t:selectOneMenu>
+						</div>
+						<div>
+							<h:outputText value="FILE: " />
+							<t:outputText value="#{updater.downloadInfo}" />
+						</div>
+						<div>
+							<h:outputText value="SIZE: " />
+							<t:outputText value="#{updater.downloadSize}">
+								<f:convertNumber pattern="#,##0" />
+							</t:outputText>
+						</div>
+						<div>
+						<h:outputText value="BYTESDOWNLOADED: " />
+							<t:outputText value="#{updater.bytesDownloaded}">
+								<f:convertNumber pattern="#,##0" />
+							</t:outputText>
+						</div>
+					</div>
+				</t:div>
+			</t:div>
+			<script>
+				setTimeout("doRewrite()", 2000);
+			</script>
+		</h:form>
+
+	</ui:define>
+
+</ui:composition>
+</body>
+</html>
+	

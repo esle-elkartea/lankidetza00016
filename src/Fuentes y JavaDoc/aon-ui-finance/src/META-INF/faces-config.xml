@@ -1,0 +1,592 @@
+<?xml version="1.0"?>
+<!DOCTYPE faces-config PUBLIC
+  "-//Sun Microsystems, Inc.//DTD JavaServer Faces Config 1.1//EN"
+  "http://java.sun.com/dtd/web-facesconfig_1_1.dtd">
+
+<faces-config>
+
+	<!-- ************ COLLECTION **************** -->
+	<managed-bean>
+		<managed-bean-name>financeCollections</managed-bean-name>
+		<managed-bean-class>
+			com.code.aon.ui.finance.controller.FinanceCollectionsController
+		</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+
+	<!-- ************* BANK ***************** -->
+	<managed-bean>
+		<managed-bean-name>bank</managed-bean-name>
+		<managed-bean-class>
+			com.code.aon.ui.form.BasicController
+		</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<managed-property>
+			<property-name>queryOnStartUP</property-name>
+			<value>true</value>
+		</managed-property>
+		<managed-property>
+			<property-name>pojo</property-name>
+			<value>com.code.aon.finance.Bank</value>
+		</managed-property>
+	</managed-bean>
+	
+	<!-- ************* BANK LOOKUP ***************** -->
+	<managed-bean>
+		<managed-bean-name>bankLookup</managed-bean-name>
+		<managed-bean-class>
+			com.code.aon.ui.form.LookupController
+		</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<managed-property>
+			<property-name>queryOnStartUP</property-name>
+			<value>true</value>
+		</managed-property>
+		<managed-property>
+			<property-name>foreignPojo</property-name>
+			<value>com.code.aon.finance.Bank</value>
+		</managed-property>
+		<managed-property>
+			<property-name>aliasPrefix</property-name>
+			<value>Bank_Lookup</value>
+		</managed-property>
+		<managed-property>
+			<property-name>foreignJoinProperties</property-name>
+			<list-entries>
+				<value>id</value>
+			</list-entries>
+		</managed-property>
+		<managed-property>
+			<property-name>foreignDisplayProperties</property-name>
+			<list-entries>
+				<value>name</value>
+			</list-entries>
+		</managed-property>
+		<managed-property>
+			<description>Needed for Search Select Window</description>
+			<property-name>searchPagePath</property-name>
+			<value>/finance/facelet/sw/bankSearch.faces</value>
+		</managed-property>
+	</managed-bean>
+	
+	<!-- ************* PAYMETHOD ***************** -->
+	<managed-bean>
+		<managed-bean-name>payMethod</managed-bean-name>
+		<managed-bean-class>
+			com.code.aon.ui.form.BasicController
+		</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<managed-property>
+			<property-name>queryOnStartUP</property-name>
+			<value>true</value>
+		</managed-property>
+		<managed-property>
+			<property-name>pojo</property-name>
+			<value>com.code.aon.finance.PayMethod</value>
+		</managed-property>
+	</managed-bean>
+	
+	<!-- ************* FBATCH ***************** -->
+	<managed-bean>
+		<managed-bean-name>fbatch</managed-bean-name>
+		<managed-bean-class>
+			com.code.aon.ui.finance.controller.FBatchController
+		</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<managed-property>
+			<property-name>queryOnStartUP</property-name>
+			<value>true</value>
+		</managed-property>
+		<managed-property>
+			<property-name>pojo</property-name>
+			<value>com.code.aon.finance.FinanceBatch</value>
+		</managed-property>
+		<managed-property>
+			<property-name>listenerClasses</property-name>
+			<list-entries>
+				<value-class>
+					com.code.aon.ui.form.event.IControllerListener
+				</value-class>
+				<value>#{fBatchDetailListener}</value>
+				<value>#{fBatchControllerListener}</value>
+			</list-entries>
+		</managed-property>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>fBatchDetailListener</managed-bean-name>
+		<managed-bean-class>
+			com.code.aon.ui.form.listener.LinesControllerListener
+		</managed-bean-class>
+		<managed-bean-scope>none</managed-bean-scope>
+		<managed-property>
+			<property-name>childBean</property-name>
+			<value>fBatchDetail</value>
+		</managed-property>
+		<managed-property>
+			<property-name>aliasMap</property-name>
+			<map-entries>
+				<map-entry>
+					<key>FinanceBatchDetail_financeBatch_id</key>
+                    <value>id</value>
+				</map-entry>
+			</map-entries>
+		</managed-property>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>fBatchControllerListener</managed-bean-name>
+		<managed-bean-class>
+			com.code.aon.ui.finance.event.FBatchControllerListener
+		</managed-bean-class>
+		<managed-bean-scope>none</managed-bean-scope>
+	</managed-bean>
+	
+	<!-- ************* FBATCHDETAIL ***************** -->
+	<managed-bean>
+		<managed-bean-name>fBatchDetail</managed-bean-name>
+		<managed-bean-class>com.code.aon.ui.finance.controller.FBatchDetailController</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<managed-property>
+			<property-name>queryOnStartUP</property-name>
+			<value>true</value>
+		</managed-property>
+		<managed-property>
+			<property-name>pojo</property-name>
+			<value>com.code.aon.finance.FinanceBatchDetail</value>
+		</managed-property>
+		<managed-property>
+			<property-name>cascadeDelete</property-name>
+			<value>true</value>
+		</managed-property>
+		<managed-property>
+			<property-name>masterControllerName</property-name>
+			<value>fbatch</value>
+		</managed-property>
+		<managed-property>
+			<property-name>propertyMap</property-name>
+			<map-entries>
+				<map-entry>
+					<key>id</key>
+					<value>financeBatch.id</value>
+				</map-entry>
+			</map-entries>
+		</managed-property>
+	</managed-bean>
+	
+	<!-- ************* FINANCE ***************** -->
+	<managed-bean>
+		<managed-bean-name>finance</managed-bean-name>
+		<managed-bean-class>
+			com.code.aon.ui.finance.controller.FinanceController
+		</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<managed-property>
+			<property-name>queryOnStartUP</property-name>
+			<value>true</value>
+		</managed-property>
+		<managed-property>
+			<property-name>pojo</property-name>
+			<value>com.code.aon.finance.Finance</value>
+		</managed-property>
+		<managed-property>
+			<property-name>listenerClasses</property-name>
+			<list-entries>
+				<value-class>
+					com.code.aon.ui.form.event.IControllerListener
+				</value-class>
+				<value>#{financeTrackingListener}</value>
+			</list-entries>
+		</managed-property>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>financeTrackingListener</managed-bean-name>
+		<managed-bean-class>
+			com.code.aon.ui.form.listener.LinesControllerListener
+		</managed-bean-class>
+		<managed-bean-scope>none</managed-bean-scope>
+		<managed-property>
+			<property-name>childBean</property-name>
+			<value>financeTracking</value>
+		</managed-property>
+		<managed-property>
+			<property-name>aliasMap</property-name>
+			<map-entries>
+				<map-entry>
+					<key>FinanceTracking_finance_id</key>
+                    <value>id</value>
+				</map-entry>
+			</map-entries>
+		</managed-property>
+	</managed-bean>
+	
+	<!-- ************* FINANCETRACKING ***************** -->
+	<managed-bean>
+		<managed-bean-name>financeTracking</managed-bean-name>
+		<managed-bean-class>com.code.aon.ui.form.LinesController</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<managed-property>
+			<property-name>queryOnStartUP</property-name>
+			<value>true</value>
+		</managed-property>
+		<managed-property>
+			<property-name>pojo</property-name>
+			<value>com.code.aon.finance.FinanceTracking</value>
+		</managed-property>
+		<managed-property>
+			<property-name>cascadeDelete</property-name>
+			<value>true</value>
+		</managed-property>
+		<managed-property>
+			<property-name>masterControllerName</property-name>
+			<value>finance</value>
+		</managed-property>
+		<managed-property>
+			<property-name>propertyMap</property-name>
+			<map-entries>
+				<map-entry>
+					<key>id</key>
+					<value>finance.id</value>
+				</map-entry>
+			</map-entries>
+		</managed-property>
+	</managed-bean>
+	
+	<!--  **** CREDITOR **** -->
+	<managed-bean>
+		<managed-bean-name>creditor</managed-bean-name>
+		<managed-bean-class>
+			com.code.aon.ui.finance.controller.CreditorController
+		</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<managed-property>
+			<property-name>queryOnStartUP</property-name>
+			<value>true</value>
+		</managed-property>
+		<managed-property>
+			<property-name>pojo</property-name>
+			<value>com.code.aon.finance.Creditor</value>
+		</managed-property>
+		<managed-property>
+			<property-name>listenerClasses</property-name>
+			<list-entries>
+				<value-class>com.code.aon.ui.form.event.IControllerListener</value-class>
+				<value>#{creditorAddressListener}</value>
+				<value>#{creditorMediaListener}</value>
+				<value>#{creditorRBankChildListener}</value>
+				<value>#{creditorRPayMethodChildListener}</value>
+			</list-entries>
+		</managed-property>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>creditorRegistryChildListener</managed-bean-name>
+		<managed-bean-class>
+			com.code.aon.ui.form.listener.ChildControllerListener
+		</managed-bean-class>
+		<managed-bean-scope>none</managed-bean-scope>
+		<managed-property>
+			<property-name>masterBean</property-name>
+			<value>creditor.registry</value>
+		</managed-property>
+		<managed-property>
+			<property-name>masterPropertyName</property-name>
+			<value>registry</value>
+		</managed-property>
+	</managed-bean>
+	
+	<!--  **** CREDITOR ADDRESS **** -->
+
+	<managed-bean>
+		<managed-bean-name>creditorAddress</managed-bean-name>
+		<managed-bean-class>
+			com.code.aon.ui.finance.controller.CreditorAddressController
+		</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<managed-property>
+			<property-name>pojo</property-name>
+			<value>com.code.aon.registry.RegistryAddress</value>
+		</managed-property>
+		<managed-property>
+			<property-name>listenerClasses</property-name>
+			<list-entries>
+				<value-class>com.code.aon.ui.form.event.IControllerListener</value-class>
+				<value>#{creditorRegistryChildListener}</value>
+			</list-entries>
+		</managed-property>
+	</managed-bean>
+
+	<managed-bean>
+		<managed-bean-name>creditorAddressListener</managed-bean-name>
+		<managed-bean-class>
+			com.code.aon.ui.form.listener.MasterControllerListener
+		</managed-bean-class>
+		<managed-bean-scope>none</managed-bean-scope>
+		<managed-property>
+			<property-name>childBean</property-name>
+			<value>creditorAddress</value>
+		</managed-property>
+		<managed-property>
+			<property-name>aliasMap</property-name>
+			<map-entries>
+				<map-entry>
+					<key>RegistryAddress_registry_id</key>
+                    <value>id</value>
+				</map-entry>
+			</map-entries>
+		</managed-property>
+	</managed-bean>
+	
+	<!--  **** CREDITOR MEDIA **** -->
+	
+	<managed-bean>
+		<managed-bean-name>creditorMedia</managed-bean-name>
+		<managed-bean-class>
+			com.code.aon.ui.finance.controller.CreditorMediaController
+		</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<managed-property>
+			<property-name>pojo</property-name>
+			<value>com.code.aon.registry.RegistryMedia</value>
+		</managed-property>
+		<managed-property>
+			<property-name>listenerClasses</property-name>
+			<list-entries>
+				<value-class>com.code.aon.ui.form.event.IControllerListener</value-class>
+				<value>#{creditorRegistryChildListener}</value>
+			</list-entries>
+		</managed-property>
+	</managed-bean>
+
+	<managed-bean>
+		<managed-bean-name>creditorMediaListener</managed-bean-name>
+		<managed-bean-class>
+			com.code.aon.ui.form.listener.MasterControllerListener
+		</managed-bean-class>
+		<managed-bean-scope>none</managed-bean-scope>
+		<managed-property>
+			<property-name>childBean</property-name>
+			<value>creditorMedia</value>
+		</managed-property>
+		<managed-property>
+			<property-name>aliasMap</property-name>
+			<map-entries>
+				<map-entry>
+					<key>RegistryMedia_registry_id</key>
+                    <value>id</value>
+				</map-entry>
+			</map-entries>
+		</managed-property>
+	</managed-bean>
+
+	<!-- **** CREDITOR RBANK **** -->
+	<managed-bean>
+		<managed-bean-name>creditorRbank</managed-bean-name>
+		<managed-bean-class>
+			com.code.aon.ui.form.LinesController
+		</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<managed-property>
+			<property-name>pojo</property-name>
+			<value>com.code.aon.finance.RegistryBank</value>
+		</managed-property>
+		<managed-property>
+			<property-name>cascadeDelete</property-name>
+			<value>true</value>
+		</managed-property>
+		<managed-property>
+			<property-name>masterControllerName</property-name>
+			<value>creditor</value>
+		</managed-property>
+		<managed-property>
+			<property-name>propertyMap</property-name>
+			<map-entries>
+				<map-entry>
+					<key>id</key>
+					<value>registry.id</value>
+				</map-entry>
+			</map-entries>
+		</managed-property>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>creditorRBankChildListener</managed-bean-name>
+		<managed-bean-class>
+			com.code.aon.ui.form.listener.LinesControllerListener
+		</managed-bean-class>
+		<managed-bean-scope>none</managed-bean-scope>
+		<managed-property>
+			<property-name>childBean</property-name>
+			<value>creditorRbank</value>
+		</managed-property>
+		<managed-property>
+			<property-name>aliasMap</property-name>
+			<map-entries>
+				<map-entry>
+					<key>RegistryBank_registry_id</key>
+                    <value>id</value>
+				</map-entry>
+			</map-entries>
+		</managed-property>
+	</managed-bean>
+	
+	<!-- **** CREDITOR RPAYMETHOD **** -->
+	<managed-bean>
+		<managed-bean-name>creditorRpayMethod</managed-bean-name>
+		<managed-bean-class>
+			com.code.aon.ui.finance.controller.RegistryRPayMethodController
+		</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<managed-property>
+			<property-name>pojo</property-name>
+			<value>com.code.aon.finance.RegistryPayMethod</value>
+		</managed-property>
+		<managed-property>
+			<property-name>cascadeDelete</property-name>
+			<value>true</value>
+		</managed-property>
+		<managed-property>
+			<property-name>masterControllerName</property-name>
+			<value>creditor</value>
+		</managed-property>
+		<managed-property>
+			<property-name>propertyMap</property-name>
+			<map-entries>
+				<map-entry>
+					<key>id</key>
+					<value>registry.id</value>
+				</map-entry>
+			</map-entries>
+		</managed-property>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>creditorRPayMethodChildListener</managed-bean-name>
+		<managed-bean-class>
+			com.code.aon.ui.form.listener.LinesControllerListener
+		</managed-bean-class>
+		<managed-bean-scope>none</managed-bean-scope>
+		<managed-property>
+			<property-name>childBean</property-name>
+			<value>creditorRpayMethod</value>
+		</managed-property>
+		<managed-property>
+			<property-name>aliasMap</property-name>
+			<map-entries>
+				<map-entry>
+					<key>RegistryPayMethod_registry_id</key>
+                    <value>id</value>
+				</map-entry>
+			</map-entries>
+		</managed-property>
+	</managed-bean>
+	
+	<!-- **************** CONVERTERS  *************** -->
+	<converter>
+		<description>Conversor para FinanceBatchStatus</description>
+		<converter-id>fBatchStatusConverter</converter-id>
+		<converter-class>com.code.aon.ui.finance.converter.FinanceBatchStatusConverter</converter-class>
+	</converter>
+	
+	<converter>
+		<description>Conversor para FinanceBatchType</description>
+		<converter-id>fBatchTypeConverter</converter-id>
+		<converter-class>com.code.aon.ui.finance.converter.FinanceBatchTypeConverter</converter-class>
+	</converter>
+	
+  <!-- =================== Navigation Rules ================= -->
+	
+  <!-- **************** MENU  *************** -->	
+  <navigation-rule>
+	<navigation-case>
+		<from-outcome>content</from-outcome>
+		<to-view-id>/facelet/homepage/content.faces</to-view-id>
+	</navigation-case>
+	<navigation-case>
+        <from-outcome>firstContent</from-outcome>
+        <to-view-id>/facelet/homepage/firstContent.faces</to-view-id>
+    </navigation-case>
+    <navigation-case>
+		<from-outcome>bank</from-outcome>
+		<to-view-id>/finance/facelet/auxiliary/bank/grid.faces</to-view-id>
+	</navigation-case>
+	<navigation-case>
+		<from-outcome>pay_method</from-outcome>
+		<to-view-id>/finance/facelet/auxiliary/pay_method/grid.faces</to-view-id>
+	</navigation-case>
+	<navigation-case>
+		<from-outcome>fbatch</from-outcome>
+		<to-view-id>/finance/facelet/fbatch/search.faces</to-view-id>
+	</navigation-case>
+	<navigation-case>
+ 		<from-outcome>finance</from-outcome>
+		<to-view-id>/finance/facelet/finance/search.faces</to-view-id>
+	</navigation-case>
+	<navigation-case>
+      <from-outcome>creditor</from-outcome>
+      <to-view-id>/finance/facelet/creditor/form.faces</to-view-id>
+    </navigation-case>
+  </navigation-rule>
+  
+  	<!-- =================== Finance Batch ================= -->
+	<navigation-rule>
+		<navigation-case>
+			<from-outcome>fbatch_list</from-outcome>
+			<to-view-id>/finance/facelet/fbatch/list.faces</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>fbatch_search</from-outcome>
+			<to-view-id>/finance/facelet/fbatch/search.faces</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>fbatch_form</from-outcome>
+			<to-view-id>/finance/facelet/fbatch/form.faces</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<!-- =================== Finance ================= -->
+	<navigation-rule>
+		<navigation-case>
+			<from-outcome>finance_list</from-outcome>
+			<to-view-id>/finance/facelet/finance/list.faces</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>finance_search</from-outcome>
+			<to-view-id>/finance/facelet/finance/search.faces</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>finance_form</from-outcome>
+			<to-view-id>/finance/facelet/finance/form.faces</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+  <!-- =================== Creditor ========================== -->
+  <navigation-rule>
+    <navigation-case>
+      <from-outcome>creditor_form</from-outcome>
+      <to-view-id>/finance/facelet/creditor/form.faces</to-view-id>
+    </navigation-case>
+    <navigation-case>
+      <from-outcome>creditor_list</from-outcome>
+      <to-view-id>/finance/facelet/creditor/list.faces</to-view-id>
+    </navigation-case>
+    <navigation-case>
+      <from-outcome>creditor_search</from-outcome>
+      <to-view-id>/finance/facelet/creditor/search.faces</to-view-id>
+    </navigation-case>
+  </navigation-rule>
+  
+  <!-- =================== Select Windows ========================== -->
+  <navigation-rule>
+		<navigation-case>
+			<from-outcome>bank_sw</from-outcome>
+			<to-view-id>/finance/facelet/sw/bank.faces</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>bank_sw_search</from-outcome>
+			<to-view-id>/finance/facelet/sw/bankSearch.faces</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+</faces-config>

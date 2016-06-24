@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<dao>
+	<bean class="com.code.aon.planner.core.Task">
+		<alias names="id,title,startDate,dueDate,priority,status,percent,owner,alarmDate" />
+		<hibernate names="id,title,startDate,dueDate,priority,status,percent,owner.id,alarmDate" />
+	</bean>
+	<bean class="com.code.aon.planner.core.HumanResource">
+		<alias names="task,registry,entryDate" />
+		<hibernate names="task.id,registry.id,entryDate" />
+	</bean>
+</dao>

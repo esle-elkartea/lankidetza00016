@@ -1,0 +1,9 @@
+com.code.aon.company
+com.code.aon.company.dao
+com.code.aon.company.dao.hibernate
+com.code.aon.person
+com.code.aon.person.dao
+com.code.aon.person.enumeration
+com.code.aon.registry
+com.code.aon.registry.dao
+com.code.aon.registry.enumeration
